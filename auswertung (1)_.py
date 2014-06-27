@@ -14,7 +14,7 @@ import csvImport as csvImp
 # import csvExport as csvExp
 import my_plot as plot
 
-vcbxcvb
+
 # from this file, generate a Template for later work!!!
 def func(x, a, b):
     return a * x + b
@@ -43,19 +43,20 @@ if __name__ == "__main__":
     # detect the zero crossings in the square wave signal
     zerocrossing = np.where(
         np.diff(np.sign(imported_data.data["Channel B"])))[0]
-    print(zerocrossing) #indicies in first column (time) of square wave crossing zero 
+    print(zerocrossing) 
+            #indicies in first column (time) of square wave crossing zero 
     # calculate the width of the peak finder as the difference of the second
     # and third entry in the zerocrossing vector.
 
     timepoints_of_zerocrossing = imported_data.data["Time"][zerocrossing]
-
+    
     # filter the signal
     N = 10
     Fc = 1000
     Fs = 1600
     # provide them to firwin
     h = firwin(numtaps=N, cutoff=40, nyq=Fs / 2)
-
+    
     # 'x' is the time-series data you are filtering
     filtered_signal = lfilter(h, 1.0, imported_data.data["Channel A"])
 
@@ -83,7 +84,7 @@ if __name__ == "__main__":
         "figure": 1,
         "data": [timepoints_of_zerocrossing, [100] * len(timepoints_of_zerocrossing)],
         "marker": "+",
-        "legend": "T",
+        "legend": "right",
         "legendentries": "zero crossing",
         "linestyle": "None"
     }
@@ -94,7 +95,7 @@ if __name__ == "__main__":
         "figure": 1,
         "data": [imported_data.data["Time"], imported_data.data["Channel A"], filtered_signal],
         "savefig": "test",
-        "legend": "T",
+        "legend": "right",
         "legendentries": "before filtering, after filtering",
         "xlabel": "test",
         "ylabel": "test",
@@ -106,8 +107,8 @@ if __name__ == "__main__":
     plotobject = {
         "figure": 2,
         "data": [imported_data.data["Time"][maximum:zerocrossing[1]], processed_segment],
-        "savefig": "test",
-        "legend": "T",
+        "savefig": "test1",
+        "legend": "right",
         "legendentries": "before filtering, after filtering",
         "xlabel": "test",
         "ylabel": "test",
@@ -123,8 +124,8 @@ if __name__ == "__main__":
     plotobject = {
         "figure": 2,
         "data": [x, vecfunc(x, a, b)],
-        "savefig": "test",
-        "legend": "T",
+        "savefig": "test1",
+        "legend": "right",
         "legendentries": "fit",
         "xlabel": "test",
         "ylabel": "test",
@@ -136,5 +137,4 @@ if __name__ == "__main__":
     #  time constant in seconds
     print(-1 / a / 1000)
 
-    print(zerocrossing)
 
