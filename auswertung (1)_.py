@@ -22,7 +22,7 @@ def func(x, a, b):
 if __name__ == "__main__":
 
     test_set = {
-        "file": '1_MO_220pF_1MO_1MO_A_V1MO_B_SIG_F_200Hz_13.csv',
+        "file": '1_MO_220pF_1MO_1MO_A_V1MO_B_SIG_F_200Hz_30.csv',
         "header": "T",
         # if header is not true then the names of the variables can bespecified
         "names": ["x", "y", "z"],
@@ -74,6 +74,7 @@ if __name__ == "__main__":
     x = x[0:600]
     y = processed_segment[0:600]
     para = curve_fit(func, x, y, x0, sigma=None)
+    print(para)
     a = para[0][0]
     b = para[0][1]
     # popt, pcov= curve_fit(func, ,processed_segment, x0,sigma = None)
@@ -119,7 +120,7 @@ if __name__ == "__main__":
 
     vecfunc = np.vectorize(func)
 
-    print(vecfunc(x, a, b))
+   # print(vecfunc(x, a, b))
 
     plotobject = {
         "figure": 2,
@@ -135,6 +136,6 @@ if __name__ == "__main__":
     plot.my_plot(plotobject)
 
     #  time constant in seconds
-    print(-1 / a / 1000)
+    print(a**-1/-1000)
 
 
