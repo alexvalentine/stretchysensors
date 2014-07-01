@@ -22,7 +22,7 @@ def func(x, a, b):
 if __name__ == "__main__":
 
     test_set = {
-        "file": '1_MO_220pF_1MO_1MO_A_V1MO_B_SIG_F_200Hz_30.csv',
+        "file": '6-25-14_Strain_0.45_90mm_01.csv',
         "header": "T",
         # if header is not true then the names of the variables can bespecified
         "names": ["x", "y", "z"],
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # detect the zero crossings in the square wave signal
     zerocrossing = np.where(
-        np.diff(np.sign(imported_data.data["Channel B"])))[0]
+        np.diff(np.sign(imported_data.data["Channel A"])))[0]
     print(zerocrossing) 
             #indicies in first column (time)  square wave crossing zero 
     # calculate the width of the peak finder as the difference of the second
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     h = firwin(numtaps=N, cutoff=40, nyq=Fs / 2)
     
     # 'x' is the time-series data you are filtering
-    filtered_signal = lfilter(h, 1.0, imported_data.data["Channel A"])
+    filtered_signal = lfilter(h, 1.0, imported_data.data["Channel B"])
 
     # use the zerocrossing in order to segment the signal
 
@@ -102,8 +102,8 @@ if __name__ == "__main__":
 
     plotobject = {
         "figure": 1,
-        "data": [imported_data.data["Time"], imported_data.data["Channel A"], filtered_signal],
-        "savefig": "test",
+        "data": [imported_data.data["Time"], imported_data.data["Channel B"], filtered_signal],
+        "savefig": "test_",
         "legend": "right",
         "legendentries": "before filtering, after filtering",
         "xlabel": "test",
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     plotobject = {
         "figure": 2,
         "data": [imported_data.data["Time"][maximum:zerocrossing[1]], processed_segment],
-        "savefig": "test1",
+        "savefig": "test__",
         "legend": "right",
         "legendentries": "before filtering, after filtering",
         "xlabel": "test",
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     plotobject = {
         "figure": 2,
         "data": [x, vecfunc(x, a, b)],
-        "savefig": "test1",
+        "savefig": "test___",
         "legend": "right",
         "legendentries": "fit",
         "xlabel": "test",
