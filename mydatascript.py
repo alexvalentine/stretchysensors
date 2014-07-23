@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # detect the zero crossings in the square wave signal
     zerocrossing = np.where(
-        np.diff(np.sign(imported_data.data["Channel A"])))[0]
+        np.diff(np.sign(imported_data.data["Channel B"])))[0]
     print(zerocrossing) 
             #indicies in first column (time)  square wave crossing zero 
     # calculate the width of the peak finder as the difference of the second
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     h = firwin(numtaps=N, cutoff=40, nyq=Fs / 2)
     
     # 'x' is the time-series data you are filtering
-    filtered_signal = lfilter(h, 1.0, imported_data.data["Channel B"])
+    filtered_signal = lfilter(h, 1.0, imported_data.data["Channel A"])
 
     # use the zerocrossing in order to segment the signal
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
     plotobject = {
         "figure": 1,
-        "data": [imported_data.data["Time"], imported_data.data["Channel B"], filtered_signal],
+        "data": [imported_data.data["Time"], imported_data.data["Channel A"], filtered_signal],
         "savefig": "test_",
         "legend": "right",
         "legendentries": "before filtering, after filtering",
